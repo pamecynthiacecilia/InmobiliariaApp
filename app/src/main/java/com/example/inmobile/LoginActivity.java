@@ -73,10 +73,8 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
         });
     }
     public void login(View view) {
-        ApiClient apiClient= ApiClient.getApi();
-        apiClient.login("sonia@mail.com", "123");
-        Intent intent=new Intent(this, MainActivity.class);
-        startActivity(intent);
+
+
         String mail = etUsuario.getText().toString();
         String password = etContraseña.getText().toString();
         viewModel.autenticar(mail, password);

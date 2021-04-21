@@ -33,12 +33,12 @@ public class MapaInicio extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             LatLng Inmobiliaria = new LatLng(-33.184008, -66.313448);
             map=googleMap;
-            map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
             CameraPosition camPos = new CameraPosition.Builder()
                     .target(Inmobiliaria)
                     .zoom(70)
                     .bearing(45)
-                    .tilt(70)
+                    .tilt(90)
                     .build();
             CameraUpdate camUpd = CameraUpdateFactory.newCameraPosition(camPos);
             map.animateCamera(camUpd);
