@@ -5,6 +5,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/inioFragment"
+            android:icon="@drawable/iniciomapa"
+            android:title="Inicio" />
+        <item
             android:id="@+id/perfilFragment"
             android:icon="@drawable/perfil"
             android:title="@string/Perfil" />
