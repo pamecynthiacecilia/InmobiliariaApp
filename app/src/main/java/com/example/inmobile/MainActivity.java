@@ -3,7 +3,10 @@ package com.example.inmobile;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.widget.TextView;
 
+import com.example.inmobile.modelo.Propietario;
+import com.example.inmobile.request.ApiClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -29,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        //actualiza el header
+
+        Propietario user= ApiClient.getApi().obtenerUsuarioActual();
+
+
+
         // Pasando cada ID de menú como un conjunto de ID porque cada
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.mapaInicioFragment,

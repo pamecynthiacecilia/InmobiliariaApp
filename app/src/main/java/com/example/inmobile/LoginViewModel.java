@@ -32,6 +32,7 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     public void autenticar(String mail, String password) {
+
         ApiClient apiClient= ApiClient.getApi();
         Propietario propietario = apiClient.login(mail, password);
 
@@ -45,5 +46,4 @@ public class LoginViewModel extends AndroidViewModel {
         }
     }
 }
-
 
