@@ -21,13 +21,27 @@ public class PerfilViewModel extends ViewModel {
     }
 
     //este metodo nos trae al usuario Logueado
-    public void ObtenerDatos(){
+    public void obtenerDatos(){
 
         ApiClient apiClient= ApiClient.getApi();
         Propietario p = apiClient.obtenerUsuarioActual();
         // paso el usuario al mutable
         propietarioMutable.setValue(p);
     }
+
+    public void editar(int id,Long dni ,String nombre, String apellido, String email,  String password, String tel){
+
+        ApiClient apiClient= ApiClient.getApi();
+        Propietario propietario = new Propietario( id, dni,nombre, apellido, email,password,tel);
+        apiClient.actualizarPerfil(propietario);
+        propietarioMutable.setValue(propietario);
+    }
+
+
+
+
+
+
 
 }
 
