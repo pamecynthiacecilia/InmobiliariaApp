@@ -5,17 +5,31 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.inmobile.modelo.Propietario;
+import com.example.inmobile.request.ApiClient;
 
 public class PerfilViewModel extends ViewModel {
 
-    private MutableLiveData<Propietario> propietario;
-    public PerfilViewModel() {
-        super();
-    }
-    public LiveData<Propietario> getPropietario() {
-        if (propietario == null) {
-            propietario = new MutableLiveData<>();
+    private MutableLiveData<Propietario>propietarioMutable;
+
+    public LiveData<Propietario> getPropietarioMutable(){
+
+        if(propietarioMutable==null){
+            propietarioMutable=new MutableLiveData<>();
         }
-        return propietario;
+
+        return propietarioMutable;
     }
+
+    //este metodo nos trae al usuario Logueado
+    public void ObtenerDatos(){
+
+        ApiClient apiClient= ApiClient.getApi();
+        Propietario p = apiClient.obtenerUsuarioActual();
+        // paso el usuario al mutable
+        propietarioMutable.setValue(p);
+    }
+
 }
+
+
+
