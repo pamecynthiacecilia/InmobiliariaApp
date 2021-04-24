@@ -9,17 +9,16 @@ import com.example.inmobile.request.ApiClient;
 
 public class PerfilViewModel extends ViewModel {
 
-    private MutableLiveData<Propietario>propietarioMutable;
-
-    public LiveData<Propietario> getPropietarioMutable(){
-
-        if(propietarioMutable==null){
-            propietarioMutable=new MutableLiveData<>();
+    private MutableLiveData<Propietario> propietarioMutable;
+    public PerfilViewModel() {
+        super();
+    }
+    public LiveData<Propietario> getPropietarioMutable() {
+        if (propietarioMutable == null) {
+            propietarioMutable = new MutableLiveData<>();
         }
-
         return propietarioMutable;
     }
-
     //este metodo nos trae al usuario Logueado
     public void obtenerDatos(){
 
@@ -37,13 +36,4 @@ public class PerfilViewModel extends ViewModel {
         propietarioMutable.setValue(propietario);
     }
 
-
-
-
-
-
-
 }
-
-
-

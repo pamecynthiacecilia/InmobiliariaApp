@@ -30,7 +30,7 @@ public class LogoutFragment extends Fragment {
 
     public void cerrarSesión() {
         new AlertDialog.Builder(getContext(), R.style.AlertDialogTheme)
-                .setTitle("Cerrr Sesión")
+                .setTitle("Cerrar Sesión")
                 .setMessage("Está seguro/a  que desea cerrar la sesión :( ????")
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override

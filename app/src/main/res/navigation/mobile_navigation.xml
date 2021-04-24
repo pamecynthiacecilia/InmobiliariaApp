@@ -58,7 +58,7 @@
     <fragment
         android:id="@+id/logoutFragment"
         android:name="com.example.inmobile.ui.logout.LogoutFragment"
-        android:label="@string/Logout"
+        android:label="Logout"
         tools:layout="@layout/logout_fragment" />
     <fragment
         android:id="@+id/inmuebleFragment"
@@ -90,6 +90,6 @@
     <fragment
         android:id="@+id/mapaInicioFragment"
         android:name="com.example.inmobile.ui.mapaInicio.MapaInicio"
-        android:label="mapa_inicio_fragment"
+        android:label="Nuestra Ubicacion"
         tools:layout="@layout/mapa_inicio_fragment" />
 </navigation>
