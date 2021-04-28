@@ -13,17 +13,24 @@ import java.util.ArrayList;
 
 public class InquilinosViewModel extends ViewModel {
     private Context context;
-    private MutableLiveData<ArrayList<Inmueble>> inmuebles;
+    private MutableLiveData<ArrayList<Inmueble>> inmueblesMutable;
 
     public LiveData<ArrayList<Inmueble>> getInmuebles() {
-        if (inmuebles == null) {
-            inmuebles = new MutableLiveData<>();
+        if (inmueblesMutable == null) {
+            inmueblesMutable = new MutableLiveData<>();
         }
-        return inmuebles;
+        return inmueblesMutable;
     }
+    //Acá buscamos en la ApiClient y nos trae los inmuebles que tienen un inquilino
     public void cargarInmueblesConInquilino() {
+
         ApiClient apiClient= ApiClient.getApi();
         ArrayList<Inmueble> inmuebles = apiClient.obtenerPropiedadesAlquiladas();
+        this.inmueblesMutable.setValue(inmuebles);
     }
+
+
+
+
 
 }

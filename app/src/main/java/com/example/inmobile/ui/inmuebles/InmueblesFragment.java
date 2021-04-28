@@ -43,11 +43,14 @@ public class InmueblesFragment extends Fragment {
             public void onChanged(ArrayList<Inmueble> inmuebles) {
                 GridLayoutManager gridLayoutManager= new GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false);
                 rvInmuebles.setLayoutManager(gridLayoutManager);
-
+                adapter = new InmuebleAdapter(context, inmuebles, getLayoutInflater());
+                rvInmuebles.setAdapter(adapter);
 
 
             }
         });
+
+
 
     }
 

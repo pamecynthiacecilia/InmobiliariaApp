@@ -1,5 +1,8 @@
 package com.example.inmobile.ui.inmuebles;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -49,8 +54,22 @@ public class InmuebleFragment extends Fragment {
         inmuebleViewModel.getInmueble().observe(getActivity(), new Observer<Inmueble>() {
             @Override
             public void onChanged(Inmueble inmueble) {
+                tvId.setText(inmueble.getIdInmueble() + "");
+                tvDireccion.setText(inmueble.getDireccion());
+                tvTipo.setText(inmueble.getTipo());
+                tvUso.setText(inmueble.getUso());
+                tvAmbientes.setText(inmueble.getAmbientes() + "");
+                tvPrecio.setText("$" + inmueble.getPrecio());
+                cbEstado.setChecked(inmueble.isEstado());
+                Resources res = getResources();
+                Bitmap src = BitmapFactory.decodeResource(res, Integer.parseInt(inmueble.getImagen()));
+                RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
+                dr.setCornerRadius(100.0f);
+                ivImagenInmueble.setImageDrawable(dr);
 }
         });
+
+
 
     }
 

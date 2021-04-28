@@ -13,6 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobile.R;
 import com.example.inmobile.modelo.Inmueble;
 
@@ -39,7 +42,11 @@ public class InmuebleConInquilinoAdapter extends RecyclerView.Adapter<InmuebleCo
     @Override
     public void onBindViewHolder(@NonNull InmuebleConInquilinoAdapter.ViewHolder holder, int position) {
         holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
-        holder.ivImagenInmueble.setImageResource(Integer.parseInt(inmuebles.get(position).getImagen()));
+        //holder.ivImagenInmueble.setImageResource(Integer.parseInt(inmuebles.get(position).getImagen()));
+        Glide.with(context)
+                .load(inmuebles.get(position).getImagen())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.ivImagenInmueble);
 
     }
 

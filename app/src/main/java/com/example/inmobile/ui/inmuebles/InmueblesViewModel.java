@@ -9,25 +9,38 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.inmobile.modelo.Inmueble;
+import com.example.inmobile.request.ApiClient;
+import com.google.android.gms.common.AccountPicker;
 
 import java.util.ArrayList;
 
 public class InmueblesViewModel extends AndroidViewModel {
 
-    private MutableLiveData<ArrayList<Inmueble>> inmuebles;
+    private MutableLiveData<ArrayList<Inmueble>> inmueblesMutable;
     private Context context;
 
     public InmueblesViewModel(@NonNull Application application) {
         super(application);
+
         context = application.getApplicationContext();
 
     }
 
     public LiveData<ArrayList<Inmueble>> getInmuebles() {
-        if (inmuebles == null) {
-            inmuebles = new MutableLiveData<>();
+        if (inmueblesMutable == null) {
+            inmueblesMutable = new MutableLiveData<>();
         }
-        return inmuebles;
+        return inmueblesMutable;
 
     }
+    public void cargarInmuebles() {
+        ApiClient apiClient= ApiClient.getApi();
+        ArrayList<Inmueble> inmuebles =apiClient.obtnerPropiedades();
+        inmueblesMutable.setValue(inmuebles);
+
+
+    }
+
+
+
 }

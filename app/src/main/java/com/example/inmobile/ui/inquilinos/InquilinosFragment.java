@@ -47,6 +47,7 @@ public class InquilinosFragment extends Fragment {
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2, RecyclerView.VERTICAL, false);
                 rvInquilinos.setAdapter(adapter);
                 rvInquilinos.setLayoutManager(gridLayoutManager);
+
             }
         });
         inquilinosViewModel.cargarInmueblesConInquilino();
