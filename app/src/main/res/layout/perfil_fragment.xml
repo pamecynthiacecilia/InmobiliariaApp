@@ -66,7 +66,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
-
+            android:enabled="false"
             android:inputType="textPersonName"
             android:minWidth="300dp"
             android:textColor="#B30B04"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
 
-
+            android:enabled="false"
             android:inputType="textPersonName"
             android:minWidth="300dp"
             android:textColor="#B30B04"
@@ -99,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
-
+            android:enabled="false"
             android:inputType="textPersonName"
             android:minWidth="300dp"
             android:textColor="#B30B04"
@@ -118,7 +118,7 @@
             android:layout_marginStart="10dp"
             android:ems="10"
 
-
+            android:enabled="false"
             android:inputType="textEmailAddress"
             android:minWidth="300dp"
             android:textColor="#B30B04"
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
 
-
+            android:enabled="false"
             android:inputType="textPassword"
             android:minWidth="300dp"
             android:textColor="#B30B04"
@@ -151,7 +151,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
 
-
+            android:enabled="false"
             android:inputType="textPersonName"
             android:minWidth="300dp"
             android:textColor="#B30B04"

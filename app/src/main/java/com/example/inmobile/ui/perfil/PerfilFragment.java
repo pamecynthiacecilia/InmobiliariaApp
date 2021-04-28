@@ -71,15 +71,25 @@ public class PerfilFragment extends Fragment {
             public void onClick(View view) {
                 btEditar.setVisibility(View.INVISIBLE);
                 btGuardar.setVisibility(View.VISIBLE);
+                etId.setEnabled(true);
+                etDNI.setEnabled(true);
+                etNombre.setEnabled(true);
+                etApellido.setEnabled(true);
+                etEmail.setEnabled(true);
+                etContraseña.setEnabled(true);
+                etTelefono.setEnabled(true);
 
             }
         });
                 btGuardar.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        btGuardar.setVisibility(View.INVISIBLE);
+                        btEditar.setVisibility(View.VISIBLE);
                         perfilViewModel.editar(etId.getText().length(), Long.valueOf(etDNI.getText().toString()),etNombre.getText().toString(),etApellido.getText().toString(),
                                 etEmail.getText().toString(),etContraseña.getText().toString(),etTelefono.getText().toString());
 
+               view.getContext();
                     }
                 });
 
