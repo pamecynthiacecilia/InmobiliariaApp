@@ -42,7 +42,7 @@ public class InmuebleConInquilinoAdapter extends RecyclerView.Adapter<InmuebleCo
     @Override
     public void onBindViewHolder(@NonNull InmuebleConInquilinoAdapter.ViewHolder holder, int position) {
         holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
-        //holder.ivImagenInmueble.setImageResource(Integer.parseInt(inmuebles.get(position).getImagen()));
+
         Glide.with(context)
                 .load(inmuebles.get(position).getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
