@@ -52,6 +52,7 @@ public class InmueblesFragment extends Fragment {
 
 
 
+
     }
 
 }

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobile.R;
 import com.example.inmobile.modelo.Inmueble;
 
@@ -43,7 +45,8 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
         holder.tvPrecio.setText("$" + inmuebles.get(position).getPrecio());
-        holder.ivImagenInmueble.setImageResource(Integer.parseInt(inmuebles.get(position).getImagen()));
+
+
     }
 
     @Override

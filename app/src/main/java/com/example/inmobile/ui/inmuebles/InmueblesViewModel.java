@@ -33,13 +33,6 @@ public class InmueblesViewModel extends AndroidViewModel {
         return inmueblesMutable;
 
     }
-    public void cargarInmuebles() {
-        ApiClient apiClient= ApiClient.getApi();
-        ArrayList<Inmueble> inmuebles =apiClient.obtnerPropiedades();
-        inmueblesMutable.setValue(inmuebles);
-
-
-    }
 
 
 
