@@ -18,8 +18,38 @@ import com.example.inmobile.modelo.Pago;
 
 import java.util.ArrayList;
 
-public class PagoFragment  {
+public class PagoFragment extends Fragment {
 
+    private PagoViewModel mViewModel;
 
+    public static PagoFragment newInstance() {
+        return new PagoFragment();
+    }
+
+    Context context;
+    ListView lvPagos;
+    PagoViewModel pagoViewModel;
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.pago_fragment, container, false);
+        context = root.getContext();
+        inicializar(root);
+        return root;
+    }
+
+    private void inicializar(View view) {
+        pagoViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PagoViewModel.class);
+        lvPagos = view.findViewById(R.id.lvPagos);
+        pagoViewModel.getPagos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Pago>>() {
+            @Override
+            public void onChanged(ArrayList<Pago> pagos) {
+                PagoAdapter adapter = new PagoAdapter(context, R.layout.item_pago_fragment, pagos, getLayoutInflater());
+                lvPagos.setAdapter(adapter);
+            }
+        });
+        pagoViewModel.cargarPagos(getArguments());
+
+    }
 
 }
