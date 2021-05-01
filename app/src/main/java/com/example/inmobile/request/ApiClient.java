@@ -112,6 +112,7 @@ public Propietario login(String mail, final String password){
     public void actualizarPerfil(Propietario propietario){
         usuarioActual.setId(propietario.getId());
         usuarioActual.setDni(propietario.getDni());
+        usuarioActual.setNombre(propietario.getApellido());
         usuarioActual.setApellido(propietario.getApellido());
         usuarioActual.setEmail(propietario.getEmail());
         usuarioActual.setContraseña(propietario.getContraseña());
