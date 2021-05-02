@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
+import com.example.inmobile.modelo.Pago;
 import com.example.inmobile.request.ApiClient;
 
 import java.util.ArrayList;
@@ -32,9 +33,9 @@ public class PagosViewModel  extends AndroidViewModel{
             inmueblesMutable = new MutableLiveData<>();
         }
         return inmueblesMutable;
-}
+    }
 
-    //Acá hacemos una consulta a la ApiClient para traer los inmuebles con un contrato vigente y por sus pagos
+    //Acá hacemos una consulta a la ApiClient para traer los inmuebles con un contrato y sus pagos
 
     public void cargarInmueblesConPagos() {
 

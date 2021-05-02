@@ -2,6 +2,7 @@ package com.example.inmobile.ui.pagos;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.inmobile.R;
 import com.example.inmobile.modelo.Inmueble;
+import com.example.inmobile.modelo.Pago;
 
 import java.util.ArrayList;
 
@@ -41,6 +43,7 @@ public class PagosFragment extends Fragment {
         pagosViewModel.getInmuebles().observe(getViewLifecycleOwner(), new Observer<ArrayList<Inmueble>>() {
             @Override
             public void onChanged(ArrayList<Inmueble> inmuebles) {
+
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 2, RecyclerView.VERTICAL, false);
                 adapter = new InmuebleConPagosAdapter(context, inmuebles, getLayoutInflater());
                 rvInmuebles.setLayoutManager(gridLayoutManager);

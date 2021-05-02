@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.inmobile.modelo.Contrato;
 import com.example.inmobile.modelo.Inmueble;
 import com.example.inmobile.request.ApiClient;
 
@@ -26,10 +27,23 @@ public class InmuebleViewModel extends ViewModel {
         return inmuebleMutable;
     }
 
+    public void cargarInmueble(Bundle bundle){
+        Inmueble inmueble = (Inmueble) bundle.getSerializable("inmueble");
+        inmuebleMutable.setValue(inmueble);
+    }
 
 
+    public void actualizarDatosInmueble(Inmueble inmueble){
+        ApiClient apiClient = ApiClient.getApi();
+        apiClient.actualizarInmueble(inmueble);
+        this.inmuebleMutable.setValue(inmueble);
+    }
 
     }
+
+
+
+
 
 
 

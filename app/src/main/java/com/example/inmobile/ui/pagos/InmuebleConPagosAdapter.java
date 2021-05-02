@@ -3,12 +3,14 @@ package com.example.inmobile.ui.pagos;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
@@ -18,7 +20,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobile.R;
 import com.example.inmobile.modelo.Inmueble;
+import com.example.inmobile.modelo.Pago;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class InmuebleConPagosAdapter extends RecyclerView.Adapter<InmuebleConPagosAdapter.ViewHolder>{
@@ -43,7 +47,7 @@ public class InmuebleConPagosAdapter extends RecyclerView.Adapter<InmuebleConPag
     @Override
     public void onBindViewHolder(@NonNull InmuebleConPagosAdapter.ViewHolder holder, int position) {
         holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
-        //holder.ivImagenInmueble.setImageResource(inmuebles.get(position).getImagen());
+
         Glide.with(context)
                 .load(inmuebles.get(position).getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

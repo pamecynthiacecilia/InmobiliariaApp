@@ -2,6 +2,7 @@ package com.example.inmobile.ui.pagos;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.inmobile.R;
+import com.example.inmobile.modelo.Inmueble;
 import com.example.inmobile.modelo.Pago;
 
 import java.util.ArrayList;
@@ -44,6 +46,7 @@ public class PagoFragment extends Fragment {
         pagoViewModel.getPagos().observe(getViewLifecycleOwner(), new Observer<ArrayList<Pago>>() {
             @Override
             public void onChanged(ArrayList<Pago> pagos) {
+
                 PagoAdapter adapter = new PagoAdapter(context, R.layout.item_pago_fragment, pagos, getLayoutInflater());
                 lvPagos.setAdapter(adapter);
             }

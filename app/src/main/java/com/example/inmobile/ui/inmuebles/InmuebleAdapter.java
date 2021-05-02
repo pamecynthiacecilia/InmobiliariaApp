@@ -45,6 +45,10 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
         holder.tvPrecio.setText("$" + inmuebles.get(position).getPrecio());
+        Glide.with(context)
+                .load(inmuebles.get(position).getImagen())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.ivImagenInmueble);
 
 
     }

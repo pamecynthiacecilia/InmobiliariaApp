@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.inmobile.R;
+import com.example.inmobile.modelo.Inmueble;
 import com.example.inmobile.modelo.Pago;
 
 import java.text.SimpleDateFormat;
@@ -40,17 +41,15 @@ public class PagoAdapter  extends ArrayAdapter<Pago> {
         }
         TextView tvCodigo = viewPago.findViewById(R.id.tvCodigo);
         TextView tvNumero = viewPago.findViewById(R.id.tvNumero);
-        TextView tvContrato = viewPago.findViewById(R.id.tvCodigoContrato);
+        TextView tvCodigoContrato = viewPago.findViewById(R.id.tvCodigoContrato);
         TextView tvImporte = viewPago.findViewById(R.id.tvImporte);
         TextView tvFecha = viewPago.findViewById(R.id.tvFecha);
 
         tvCodigo.setText(pagos.get(position).getIdPago() + "");
         tvNumero.setText(pagos.get(position).getNumero() + "");
-        tvContrato.setText(pagos.get(position).getContrato() + "");
+        tvCodigoContrato.setText(pagos.get(position).getContrato().getIdContrato() + "");
         tvImporte.setText("$" + pagos.get(position).getImporte());
         tvFecha.setText(pagos.get(position).getFechaDePago());
         return viewPago;
     }
 }
-
-

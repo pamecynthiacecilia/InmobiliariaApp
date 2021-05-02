@@ -49,6 +49,7 @@ public class InmueblesFragment extends Fragment {
 
             }
         });
+        inmueblesViewModel.mostrarInmuebles();
 
 
 

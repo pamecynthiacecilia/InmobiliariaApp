@@ -18,6 +18,9 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobile.R;
 import com.example.inmobile.modelo.Inmueble;
 
@@ -61,16 +64,28 @@ public class InmuebleFragment extends Fragment {
                 tvAmbientes.setText(inmueble.getAmbientes() + "");
                 tvPrecio.setText("$" + inmueble.getPrecio());
                 cbEstado.setChecked(inmueble.isEstado());
-                Resources res = getResources();
-                Bitmap src = BitmapFactory.decodeResource(res, Integer.parseInt(inmueble.getImagen()));
-                RoundedBitmapDrawable dr = RoundedBitmapDrawableFactory.create(res, src);
-                dr.setCornerRadius(100.0f);
-                ivImagenInmueble.setImageDrawable(dr);
-}
+                cbEstado.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        inmueble.setEstado(cbEstado.isChecked());
+                        inmuebleViewModel.actualizarDatosInmueble(inmueble);
+                    }
+                });
+
+
+                Glide.with(getContext())
+                        .load(inmueble.getImagen())
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(ivImagenInmueble);
+            }
         });
 
-
-
+        inmuebleViewModel.cargarInmueble(getArguments());
     }
 
 }
+
+
+
+
+

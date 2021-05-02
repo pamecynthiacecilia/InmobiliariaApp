@@ -1,9 +1,10 @@
 package com.example.inmobile.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class Contrato implements Serializable {
+public class Contrato extends ArrayList<Inmueble> implements Serializable {
 
     private int idContrato;
     private String fechaInicio;
