@@ -57,17 +57,25 @@ public class InmuebleFragment extends Fragment {
         inmuebleViewModel.getInmueble().observe(getActivity(), new Observer<Inmueble>() {
             @Override
             public void onChanged(Inmueble inmueble) {
-                tvId.setText(inmueble.getIdInmueble() + "");
+                tvId.setText(inmueble.getId() + "");
                 tvDireccion.setText(inmueble.getDireccion());
                 tvTipo.setText(inmueble.getTipo());
                 tvUso.setText(inmueble.getUso());
-                tvAmbientes.setText(inmueble.getAmbientes() + "");
+                tvAmbientes.setText(inmueble.getCantAmbientes() + "");
                 tvPrecio.setText("$" + inmueble.getPrecio());
-                cbEstado.setChecked(inmueble.isEstado());
+
+                int disponible= inmueble.getDisponible();
+
+                cbEstado.setChecked(inmueble.getDisponible() == disponible);
                 cbEstado.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        inmueble.setEstado(cbEstado.isChecked());
+                        if(disponible==1) {
+
+                            inmueble.setDisponible(disponible + 1);
+                            inmuebleViewModel.actualizarDatosInmueble(inmueble);
+                        }
+                        else inmueble.setDisponible(disponible-1);
                         inmuebleViewModel.actualizarDatosInmueble(inmueble);
                     }
                 });

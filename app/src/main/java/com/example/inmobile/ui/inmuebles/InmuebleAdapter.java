@@ -3,6 +3,7 @@ package com.example.inmobile.ui.inmuebles;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.example.inmobile.modelo.Inmueble;
 
 import java.util.List;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 
 import androidx.navigation.Navigation;
@@ -34,6 +36,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
         this.inmuebles = inmuebles;
         this.inflater = inflater;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,13 +46,19 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
         holder.tvPrecio.setText("$" + inmuebles.get(position).getPrecio());
-        Glide.with(context)
-                .load(inmuebles.get(position).getImagen())
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(holder.ivImagenInmueble);
 
+        String url= "http://192.168.0.4:45455";
+        Log.d("salir", inmuebles.get(position).getImagen());
+        Glide.with(context)
+
+                .load(url + inmuebles.get(position).getImagen())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .placeholder(R.drawable.propiedades_1)
+                .error(R.drawable.propiedades_1)
+                .into(holder.ivImagenInmueble);
 
     }
 
@@ -57,6 +66,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
     public int getItemCount() {
         return inmuebles.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvPrecio;

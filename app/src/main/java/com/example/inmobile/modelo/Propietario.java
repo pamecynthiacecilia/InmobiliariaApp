@@ -9,18 +9,18 @@ public class Propietario {
     private String nombre;
     private String apellido;
     private String email;
-    private String contraseña;
-    private String telefono;
+    private String clave;
+    private String tel;
 
     public Propietario(){}
-    public Propietario(int id, Long dni, String nombre, String apellido, String email, String contraseña, String telefono) {
+    public Propietario(int id, Long dni, String nombre, String apellido, String email, String clave, String tel) {
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
-        this.contraseña = contraseña;
-        this.telefono = telefono;
+        this.clave = clave;
+        this.tel = tel;
     }
 
     public int getId() {
@@ -63,20 +63,20 @@ public class Propietario {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getClave() {
+        return clave;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setClave(String contraseña) {
+        this.clave = clave;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public String getTel() {
+        return tel;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     @Override

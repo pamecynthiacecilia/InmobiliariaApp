@@ -1,8 +1,27 @@
 package com.example.inmobile.request;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+
 import com.example.inmobile.modelo.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 
 public class ApiClient {
@@ -30,17 +49,17 @@ public class ApiClient {
 
 
 
-//Servicios
+    //Servicios
     //Para que pueda iniciar sesion
-public Propietario login(String mail, final String password){
+    /*public Propietario login(String mail, final String password){
         for(Propietario propietario:propietarios){
-            if(propietario.getEmail().equals(mail)&&propietario.getContraseña().equals(password)){
+            if(propietario.getEmail().equals(mail)&&propietario.getClave().equals(password)){
                 usuarioActual=propietario;
                 return propietario;
             }
         }
         return null;
-}
+}*/
 
 
 //Retorna el usuario que inició Sesión
@@ -53,7 +72,7 @@ public Propietario login(String mail, final String password){
     public ArrayList<Inmueble> obtnerPropiedades(){
         ArrayList<Inmueble> temp=new ArrayList<>();
         for(Inmueble inmueble:inmuebles){
-            if(inmueble.getPropietario().equals(usuarioActual)){
+            if(inmueble.getpropietarioInmueble().equals(usuarioActual)){
                 temp.add(inmueble);
             }
         }
@@ -64,7 +83,7 @@ public Propietario login(String mail, final String password){
     public ArrayList<Inmueble> obtenerPropiedadesAlquiladas(){
         ArrayList<Inmueble> temp=new ArrayList<>();
         for(Contrato contrato:contratos){
-            if(contrato.getInmueble().getPropietario().equals(usuarioActual)){
+            if(contrato.getInmueble().getpropietarioInmueble().equals(usuarioActual)){
                 temp.add(contrato.getInmueble());
             }
         }
@@ -114,8 +133,8 @@ public Propietario login(String mail, final String password){
         usuarioActual.setDni(propietario.getDni());
         usuarioActual.setApellido(propietario.getApellido());
         usuarioActual.setEmail(propietario.getEmail());
-        usuarioActual.setContraseña(propietario.getContraseña());
-        usuarioActual.setTelefono(propietario.getTelefono());
+        usuarioActual.setClave(propietario.getClave());
+        usuarioActual.setTel(propietario.getTel());
     }
 
     //ActualizarInmueble
@@ -126,20 +145,21 @@ public Propietario login(String mail, final String password){
         }
     }
 
-    private void cargaDatos(){
+    private void cargaDatos() {
 
         //Propietarios
-        Propietario juan=new Propietario(1,23492012L,"Juan","Perez","juan@mail.com","123","2664553447");
-        Propietario sonia=new Propietario(2,17495869L,"Sonia","Lucero","sonia@mail.com","123","266485417");
+        Propietario juan = new Propietario(1, 23492012L, "Juan", "Perez", "juan@mail.com", "123", "2664553447");
+        Propietario sonia = new Propietario(2, 17495869L, "Sonia", "Lucero", "sonia@mail.com", "123", "266485417");
         propietarios.add(juan);
         propietarios.add(sonia);
 
         //Inquilinos
-        Inquilino mario=new Inquilino(100,25340691L,"Mario","Luna","Aiello sup.","luna@mail.com","2664253411","Lucero Roberto","2664851422");
+        Inquilino mario = new Inquilino(100, 25340691L, "Mario", "Luna", "Aiello sup.", "luna@mail.com", "2664253411", "Lucero Roberto", "2664851422");
         inquilinos.add(mario);
 
+    }
         //Inmuebles
-        Inmueble salon=new Inmueble(501,"Colon 340","comercial","salon",2,20000,juan,true,"http://www.secsanluis.com.ar/servicios/salon1.jpg");
+      /*  Inmueble salon=new Inmueble(501,"Colon 340","comercial","salon",2,20000,juan,,"http://www.secsanluis.com.ar/servicios/salon1.jpg");
         Inmueble casa=new Inmueble(502,"Mitre 800","particular","casa",2,15000,juan,true,"http://www.secsanluis.com.ar/servicios/casa1.jpg");
         Inmueble otraCasa=new Inmueble(503,"Salta 325","particular","casa",3,17000,sonia,true,"http://www.secsanluis.com.ar/servicios/casa2.jpg");
         Inmueble dpto=new Inmueble(504,"Lavalle 450","particular","dpto",2,25000,sonia,true,"http://www.secsanluis.com.ar/servicios/departamento1.jpg");
@@ -158,9 +178,51 @@ public Propietario login(String mail, final String password){
         pagos.add(new Pago(900,1,uno,17000,"10/02/2020"));
         pagos.add(new Pago(901,2,uno,17000,"10/03/2020"));
         pagos.add(new Pago(902,3,uno,17000,"10/04/2020"));
+    }*/
+
+//////////////////////////////////////////////////////////////////////////////////////////
+        //consumo Api ip http://192.168.0.4:45455/
+
+   private static final String PATH= "http://192.168.0.4:45455/api/";
+
+    private static MyApiInterface myApiInterface;
+
+    // genera un Objeto que implementa la interface
+    public static MyApiInterface getMyApiClient() {
+
+        Gson gson = new GsonBuilder().setLenient().create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(PATH)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+        myApiInterface= retrofit.create(MyApiInterface.class);
+
+        Log.d("salida", retrofit.baseUrl().toString());
+        return myApiInterface;
+    }
+
+    public interface MyApiInterface{
+        @FormUrlEncoded
+        @POST("propietarios/login")
+        Call<String>login(@Field("usuario")String usuario, @Field("clave") String clave);
 
 
+        @GET("propietarios/usuarioActual")
+        Call<Propietario>usuarioActual(@Header("Authorization")String token);
 
+        @GET("inmuebles/inmueblesDelPropietario")
+        Call<List<Inmueble>>inmueblesDelPropietario(@Header("Authorization")String token);
+
+        @GET("inmuebles")
+        Call<Inmueble>inmueble(@Path("id") int id, @Header("Authorization")String token);
+    }
+
+    public static String obtenerToken(Context context){
+        String token;
+        SharedPreferences sp= context.getSharedPreferences("token.dat", 0);
+        token= sp.getString("token", "NO SE PUEDO CONECTAR");
+        return token;
 
     }
 }

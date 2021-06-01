@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
     private static final int SHAKE_THRESHOLD = 600;
     private String phoneNumber = "123456";
     private LoginViewModel viewModel;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,24 +43,26 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
         senSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         senSensorManager.registerListener(this, senAccelerometer , SensorManager.SENSOR_DELAY_NORMAL);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
                 && checkSelfPermission(Manifest.permission.CALL_PHONE)
                 != PackageManager.PERMISSION_GRANTED) ;
 
         requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, 1004);
 
-
         inicializar();
     }
 
     private void inicializar() {
         viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(LoginViewModel.class);
+
         viewModel.getError().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String error) {
                 Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
             }
         });
+
         etUsuario = findViewById(R.id.etUsuario);
         etContraseña = findViewById(R.id.etContraseña);
         btLogin = findViewById(R.id.btLogin);
@@ -73,7 +76,6 @@ public class LoginActivity extends AppCompatActivity implements SensorEventListe
         });
     }
     public void login(View view) {
-
 
         String mail = etUsuario.getText().toString();
         String password = etContraseña.getText().toString();
