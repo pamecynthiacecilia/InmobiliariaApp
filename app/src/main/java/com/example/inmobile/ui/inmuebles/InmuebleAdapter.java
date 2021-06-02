@@ -51,7 +51,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
         holder.tvPrecio.setText("$" + inmuebles.get(position).getPrecio());
 
         String url= "http://192.168.0.4:45455";
-        Log.d("salir", inmuebles.get(position).getImagen());
+        Log.d("URL Imagen", url + inmuebles.get(position).getImagen());
         Glide.with(context)
 
                 .load(url + inmuebles.get(position).getImagen())
