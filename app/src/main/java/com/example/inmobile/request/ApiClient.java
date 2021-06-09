@@ -16,11 +16,13 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 
@@ -50,41 +52,12 @@ public class ApiClient {
 
 
     //Servicios
-    //Para que pueda iniciar sesion
-    /*public Propietario login(String mail, final String password){
-        for(Propietario propietario:propietarios){
-            if(propietario.getEmail().equals(mail)&&propietario.getClave().equals(password)){
-                usuarioActual=propietario;
-                return propietario;
-            }
-        }
-        return null;
-}*/
-
-
-//Retorna el usuario que inició Sesión
-    public Propietario obtenerUsuarioActual(){
-        return usuarioActual;
-    }
-
-
-    //Retorna las propiedades del usuario propietario logueado
-    public ArrayList<Inmueble> obtnerPropiedades(){
-        ArrayList<Inmueble> temp=new ArrayList<>();
-        for(Inmueble inmueble:inmuebles){
-            if(inmueble.getpropietarioInmueble().equals(usuarioActual)){
-                temp.add(inmueble);
-            }
-        }
-        return temp;
-    }
-
 //Lista de inmuebles con contratos vigentes del Propietario logueado
     public ArrayList<Inmueble> obtenerPropiedadesAlquiladas(){
         ArrayList<Inmueble> temp=new ArrayList<>();
         for(Contrato contrato:contratos){
-            if(contrato.getInmueble().getpropietarioInmueble().equals(usuarioActual)){
-                temp.add(contrato.getInmueble());
+            if(contrato.getinmuebleContrato().getpropietarioInmueble().equals(usuarioActual)){
+                temp.add(contrato.getinmuebleContrato());
             }
         }
         return temp;
@@ -96,7 +69,7 @@ public class ApiClient {
     public Contrato obtenerContratoVigente(Inmueble inmueble){
 
         for(Contrato contrato:contratos){
-            if(contrato.getInmueble().equals(inmueble)){
+            if(contrato.getinmuebleContrato().equals(inmueble)){
                 return contrato;
             }
         }
@@ -106,13 +79,13 @@ public class ApiClient {
     //Dado un inmueble, retorna el inquilino del ultimo contrato activo de ese inmueble.
     public Inquilino obtenerInquilino(Inmueble inmueble){
         for(Contrato contrato:contratos){
-            if(contrato.getInmueble().equals(inmueble)){
-                return contrato.getInquilino();
+            if(contrato.getinmuebleContrato().equals(inmueble)){
+                return contrato.getinquilinoContrato();
             }
         }
         return null;
     }
-//Dado un Contrato, retorna los pagos de dicho contrato
+    //Dado un Contrato, retorna los pagos de dicho contrato
     public ArrayList<Pago> obtenerPagos(Contrato contratoVer){
         ArrayList<Pago> temp=new ArrayList<>();
         for(Contrato contrato:contratos){
@@ -127,49 +100,25 @@ public class ApiClient {
         }
         return temp;
     }
-//Actualizar Perfil
-    public void actualizarPerfil(Propietario propietario){
-        usuarioActual.setId(propietario.getId());
-        usuarioActual.setDni(propietario.getDni());
-        usuarioActual.setApellido(propietario.getApellido());
-        usuarioActual.setEmail(propietario.getEmail());
-        usuarioActual.setClave(propietario.getClave());
-        usuarioActual.setTel(propietario.getTel());
-    }
 
-    //ActualizarInmueble
-    public void actualizarInmueble(Inmueble inmueble){
-        int posicion=inmuebles.indexOf(inmueble);
-        if(posicion!=-1){
-            inmuebles.set(posicion,inmueble);
-        }
-    }
+
 
     private void cargaDatos() {
 
-        //Propietarios
-        Propietario juan = new Propietario(1, 23492012L, "Juan", "Perez", "juan@mail.com", "123", "2664553447");
-        Propietario sonia = new Propietario(2, 17495869L, "Sonia", "Lucero", "sonia@mail.com", "123", "266485417");
-        propietarios.add(juan);
-        propietarios.add(sonia);
 
         //Inquilinos
-        Inquilino mario = new Inquilino(100, 25340691L, "Mario", "Luna", "Aiello sup.", "luna@mail.com", "2664253411", "Lucero Roberto", "2664851422");
+        Inquilino mario = new Inquilino(100, "253406910", "Mario", "Luna", "Aiello sup.", "luna@mail.com", "2664253411", "Lucero Roberto", "2664851422");
         inquilinos.add(mario);
 
     }
         //Inmuebles
-      /*  Inmueble salon=new Inmueble(501,"Colon 340","comercial","salon",2,20000,juan,,"http://www.secsanluis.com.ar/servicios/salon1.jpg");
-        Inmueble casa=new Inmueble(502,"Mitre 800","particular","casa",2,15000,juan,true,"http://www.secsanluis.com.ar/servicios/casa1.jpg");
-        Inmueble otraCasa=new Inmueble(503,"Salta 325","particular","casa",3,17000,sonia,true,"http://www.secsanluis.com.ar/servicios/casa2.jpg");
-        Inmueble dpto=new Inmueble(504,"Lavalle 450","particular","dpto",2,25000,sonia,true,"http://www.secsanluis.com.ar/servicios/departamento1.jpg");
-        Inmueble casita=new Inmueble(505,"Belgrano 218","particular","casa",5,90000,sonia,true,"http://www.secsanluis.com.ar/servicios/casa3.jpg");
+      /*  "http://www.secsanluis.com.ar/servicios/salon1.jpg");
+        "http://www.secsanluis.com.ar/servicios/casa1.jpg");
+        "http://www.secsanluis.com.ar/servicios/casa2.jpg");
+        "http://www.secsanluis.com.ar/servicios/departamento1.jpg");
+        "http://www.secsanluis.com.ar/servicios/casa3.jpg");
 
-        inmuebles.add(salon);
-        inmuebles.add(casa);
-        inmuebles.add(otraCasa);
-        inmuebles.add(dpto);
-        inmuebles.add(casita);
+
 
         //Contratos
         Contrato uno=new Contrato(701, "05/01/2020","05/01/2021",17000,mario,otraCasa);
@@ -202,11 +151,15 @@ public class ApiClient {
         return myApiInterface;
     }
 
+
     public interface MyApiInterface{
+
         @FormUrlEncoded
         @POST("propietarios/login")
         Call<String>login(@Field("usuario")String usuario, @Field("clave") String clave);
 
+        @PUT("propietarios/editar")
+        Call<Propietario>editar(@Header("Authorization") String token,@Body Propietario propietario);
 
         @GET("propietarios/usuarioActual")
         Call<Propietario>usuarioActual(@Header("Authorization")String token);
@@ -214,8 +167,18 @@ public class ApiClient {
         @GET("inmuebles/inmueblesDelPropietario")
         Call<List<Inmueble>>inmueblesDelPropietario(@Header("Authorization")String token);
 
-        @GET("inmuebles")
-        Call<Inmueble>inmueble(@Path("id") int id, @Header("Authorization")String token);
+        @GET("inmuebles/obtenerPorId/{id}")
+        Call<Inmueble>obtenerPorId(@Path("id") int id, @Header("Authorization")String token);
+
+        @PUT("inmuebles/modificarDisponible")
+        Call<Inmueble>modificarDisponible(@Header("Authorization") String token,@Body Inmueble inmueble);
+
+        @GET("contratos/inmueblesConContrato")
+        Call<List<Contrato>>inmueblesConContrato(@Header("Authorization")String token);
+
+        @GET("contratos/obtenerPorId/{id}")
+        Call<Contrato>obtenerContratoPorId(@Path("id") int id, @Header("Authorization")String token);
+
     }
 
     public static String obtenerToken(Context context){

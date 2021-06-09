@@ -49,11 +49,12 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
 
         holder.tvDireccion.setText(inmuebles.get(position).getDireccion());
         holder.tvPrecio.setText("$" + inmuebles.get(position).getPrecio());
-
+        String propietarioNombre= inmuebles.get(position).getpropietarioInmueble().getNombre();
         String url= "http://192.168.0.4:45455";
-        Log.d("URL Imagen", url + inmuebles.get(position).getImagen());
-        Glide.with(context)
+        Log.d("salida", url + inmuebles.get(position).getImagen());
+        Log.d("salida", inmuebles.get(position).getpropietarioInmueble().getNombre());
 
+        Glide.with(context)
                 .load(url + inmuebles.get(position).getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .placeholder(R.drawable.propiedades_1)
@@ -82,9 +83,9 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
                     Inmueble inmueble = inmuebles.get(getAdapterPosition());
-                    bundle.putSerializable("inmueble", inmueble);
+                    bundle.putInt("id", inmueble.getId());
                     Navigation.findNavController((Activity) context, R.id.nav_host_fragment).navigate(R.id.inmuebleFragment, bundle);
-                }
+                   }
             });
         }
     }

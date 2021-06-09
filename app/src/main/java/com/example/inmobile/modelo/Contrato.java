@@ -2,33 +2,35 @@ package com.example.inmobile.modelo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
-public class Contrato extends ArrayList<Inmueble> implements Serializable {
+public class Contrato implements Serializable {
 
-    private int idContrato;
+    private int id;
     private String fechaInicio;
     private String fechaFin;
-    private double montoAlquiler;
-    private Inquilino inquilino;
-    private Inmueble inmueble;
+    private double importe;
+    private Inquilino inquilinoContrato;
+    private Inmueble inmuebleContrato;
 
     public Contrato() {}
-    public Contrato(int idContrato, String fechaInicio, String fechaFin, double montoAlquiler, Inquilino inquilino, Inmueble inmueble) {
-        this.idContrato = idContrato;
+    public Contrato(int id, String fechaInicio, String fechaFin, double importe, Inquilino inquilinoContrato, Inmueble inmuebleContrato) {
+        this.id = id;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.montoAlquiler = montoAlquiler;
-        this.inquilino = inquilino;
-        this.inmueble = inmueble;
+        this.importe = importe;
+        this.inquilinoContrato = inquilinoContrato;
+        this.inmuebleContrato = inmuebleContrato;
     }
 
-    public int getIdContrato() {
-        return idContrato;
+
+    public int getid() {
+        return id;
     }
 
-    public void setIdContrato(int idContrato) {
-        this.idContrato = idContrato;
+    public void setid(int id) {
+        this.id = id;
     }
 
     public String getFechaInicio() {
@@ -47,41 +49,30 @@ public class Contrato extends ArrayList<Inmueble> implements Serializable {
         this.fechaFin = fechaFin;
     }
 
-    public double getMontoAlquiler() {
-        return montoAlquiler;
+    public double getimporte() {
+        return importe;
     }
 
-    public void setMontoAlquiler(double montoAlquiler) {
-        this.montoAlquiler = montoAlquiler;
+    public void setimporte(float importe) {
+        this.importe = importe;
     }
 
 
-    public Inquilino getInquilino() {
-        return inquilino;
+    public Inquilino getinquilinoContrato() {
+        return inquilinoContrato;
     }
 
-    public void setInquilino(Inquilino inquilino) {
-        this.inquilino = inquilino;
+    public void setinquilinoContrato(Inquilino inquilinoContrato) {
+        this.inquilinoContrato = inquilinoContrato;
     }
 
-    public Inmueble getInmueble() {
-        return inmueble;
+    public Inmueble getinmuebleContrato() {
+        return inmuebleContrato;
     }
 
-    public void setInmueble(Inmueble inmueble) {
-        this.inmueble = inmueble;
+    public void setinmuebleContrato(Inmueble inmuebleContrato) {
+        this.inmuebleContrato = inmuebleContrato;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Contrato contrato = (Contrato) o;
-        return idContrato == contrato.idContrato;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(idContrato);
-    }
 }

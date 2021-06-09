@@ -12,19 +12,12 @@ public class Inmueble implements Serializable {
     private int cantAmbientes;
     private double precio;
     private Propietario propietarioInmueble;
-
-    public int getDisponible() {
-        return disponible;
-    }
-
-    public void setDisponible(int disponible) {
-        this.disponible = disponible;
-    }
-
     private int disponible;
     private String imagen;
+    private int propietarioId;
 
-    public Inmueble(int id, String direccion, String uso, String tipo, int cantAmbientes, double precio, Propietario propietarioInmuebled, int disponible, String imagen) {
+    public Inmueble(int id, String direccion, String uso, String tipo, int cantAmbientes, double precio, Propietario propietarioInmueble,
+                    int disponible, String imagen, int propietarioId ) {
         this.id = id;
         this.direccion = direccion;
         this.uso = uso;
@@ -34,10 +27,12 @@ public class Inmueble implements Serializable {
         this.propietarioInmueble = propietarioInmueble;
         this.disponible = disponible;
         this.imagen = imagen;
+        this.propietarioId = propietarioId;
     }
-    public Inmueble() {
 
+    public Inmueble() {
     }
+
     public int getId() {
         return id;
     }
@@ -90,17 +85,17 @@ public class Inmueble implements Serializable {
         return propietarioInmueble;
     }
 
-    public void setpropietarioInmuebled(Propietario propietarioInmueble) {
+    public void setpropietarioInmueble(Propietario propietarioInmueble) {
         this.propietarioInmueble = propietarioInmueble;
     }
 
-   /* public boolean isEstado() {
+    public int getDisponible() {
         return disponible;
     }
 
-    public void setEstado(boolean disponible) {
+    public void setDisponible(int disponible) {
         this.disponible = disponible;
-    }*/
+    }
 
     public String getImagen() {
         return imagen;
@@ -110,16 +105,15 @@ public class Inmueble implements Serializable {
         this.imagen = imagen;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Inmueble inmueble = (Inmueble) o;
-        return id == inmueble.id;
+    public int getPropietarioId() {
+        return propietarioId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public void setPropietarioId(int propietarioId) {
+        this.propietarioId = propietarioId;
     }
+
+
+
+
 }

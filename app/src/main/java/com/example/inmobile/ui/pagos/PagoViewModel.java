@@ -33,11 +33,11 @@ public class PagoViewModel extends ViewModel {
     //Aca traemos un inmueble de la Api que tenga un contrato vigente y sus pagos
     public void cargarPagos(Bundle bundle) {
 
-        Inmueble inmueble = (Inmueble)  bundle.getSerializable("inmueble");
+        /*Inmueble inmueble = (Inmueble)  bundle.getSerializable("inmueble");
         ApiClient apiClient= ApiClient.getApi();
         Contrato contratoVer =apiClient.obtenerContratoVigente(inmueble);
         ArrayList<Pago> pagos = apiClient.obtenerPagos(contratoVer);
-        this.pagosMutable.setValue(pagos);
+        this.pagosMutable.setValue(pagos);*/
 
     }
 

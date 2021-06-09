@@ -28,12 +28,12 @@ public class InquilinoViewModel extends ViewModel {
     ////Acá recibimos un inmueble  y buscamos en la ApiClient el contrato vigente de ese inmueble y su inquilino
     public void cargarInquilino(Bundle bundle) {
 
-        Inmueble inmueble = (Inmueble) bundle.get("inmueble");
+      /*  Inmueble inmueble = (Inmueble) bundle.get("inmueble");
         ApiClient apiClient= ApiClient.getApi();
         Inquilino inquilino = apiClient.obtenerInquilino(inmueble);
         this.inquilinoMutable.setValue(inquilino);
 
-
+*/
 
     }
 

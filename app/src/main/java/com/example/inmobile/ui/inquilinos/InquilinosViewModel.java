@@ -21,16 +21,12 @@ public class InquilinosViewModel extends ViewModel {
         }
         return inmueblesMutable;
     }
+
     //Acá buscamos en la ApiClient y nos trae los inmuebles que tienen un inquilino
     public void cargarInmueblesConInquilino() {
-
-        ApiClient apiClient= ApiClient.getApi();
+      /*  ApiClient apiClient= ApiClient.getApi();
         ArrayList<Inmueble> inmuebles = apiClient.obtenerPropiedadesAlquiladas();
-        this.inmueblesMutable.setValue(inmuebles);
+        this.inmueblesMutable.setValue(inmuebles); */
     }
-
-
-
-
 
 }

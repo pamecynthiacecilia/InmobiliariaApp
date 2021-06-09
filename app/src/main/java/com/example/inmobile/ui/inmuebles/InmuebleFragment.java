@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.inmobile.R;
 import com.example.inmobile.modelo.Inmueble;
+import com.example.inmobile.modelo.Propietario;
 
 public class InmuebleFragment extends Fragment {
     private InmuebleViewModel inmuebleViewModel;
@@ -41,6 +43,15 @@ public class InmuebleFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.inmueble_fragment, container, false);
         inicializar(root);
+
+       if(getArguments() != null ) {
+
+           int id = getArguments().getInt("id");
+           Log.d("idInmueble", "" + id);
+           inmuebleViewModel.cargarInmueble(id);
+       }
+
+
         return root;
     }
 
@@ -63,20 +74,29 @@ public class InmuebleFragment extends Fragment {
                 tvUso.setText(inmueble.getUso());
                 tvAmbientes.setText(inmueble.getCantAmbientes() + "");
                 tvPrecio.setText("$" + inmueble.getPrecio());
+                String imagen= inmueble.getImagen();
+                int propietarioId= inmueble.getPropietarioId();
+                Propietario propietario= inmueble.getpropietarioInmueble();
+
 
                 int disponible= inmueble.getDisponible();
+                if(disponible==1) {
+                    cbEstado.setChecked(true);
+                }
+                else { cbEstado.setChecked(false);}
 
-                cbEstado.setChecked(inmueble.getDisponible() == disponible);
+
                 cbEstado.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(disponible==1) {
+                       // if(cbEstado.isChecked() ) {
+                          //  inmueble.setDisponible(disponible - 1);
 
-                            inmueble.setDisponible(disponible + 1);
-                            inmuebleViewModel.actualizarDatosInmueble(inmueble);
-                        }
-                        else inmueble.setDisponible(disponible-1);
-                        inmuebleViewModel.actualizarDatosInmueble(inmueble);
+                            inmuebleViewModel.actualizarDisponible(inmueble);
+                       // }
+                       // else inmueble.setDisponible(disponible+1);
+
+                       // inmuebleViewModel.actualizarDatosInmueble(inmueble);
                     }
                 });
 
@@ -88,7 +108,8 @@ public class InmuebleFragment extends Fragment {
             }
         });
 
-        inmuebleViewModel.cargarInmueble(getArguments());
+
+      //  inmuebleViewModel.cargarInmueble(getArguments());
     }
 
 }

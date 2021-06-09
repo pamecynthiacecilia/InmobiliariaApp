@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Propietario {
 
     private int id;
-    private Long dni;
+    private String dni;
     private String nombre;
     private String apellido;
     private String email;
@@ -13,8 +13,8 @@ public class Propietario {
     private String tel;
 
     public Propietario(){}
-    public Propietario(int id, Long dni, String nombre, String apellido, String email, String clave, String tel) {
-        this.id = id;
+    public Propietario( String dni, String nombre, String apellido, String email, String clave, String tel) {
+       // this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -22,6 +22,16 @@ public class Propietario {
         this.clave = clave;
         this.tel = tel;
     }
+
+    public Propietario(int id, String dni, String nombre, String apellido, String email,  String tel) {
+        this.id = id;
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+        this.tel = tel;
+    }
+
 
     public int getId() {
         return id;
@@ -31,21 +41,17 @@ public class Propietario {
         this.id = id;
     }
 
-    public Long getDni() {
+    public String getDni() {
         return dni;
     }
 
-    public void setDni(Long dni) {
+    public void setDni(String dni) {
         this.dni = dni;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() { return nombre; }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
     public String getApellido() {
         return apellido;
@@ -79,16 +85,5 @@ public class Propietario {
         this.tel = tel;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Propietario that = (Propietario) o;
-        return id == that.id;
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

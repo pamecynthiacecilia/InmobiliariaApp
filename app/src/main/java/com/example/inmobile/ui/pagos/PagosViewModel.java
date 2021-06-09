@@ -39,10 +39,10 @@ public class PagosViewModel  extends AndroidViewModel{
 
     public void cargarInmueblesConPagos() {
 
-        ApiClient apiClient= ApiClient.getApi();
+      /*  ApiClient apiClient= ApiClient.getApi();
         ArrayList<Inmueble> inmuebles= apiClient.obtenerPropiedadesAlquiladas();
         this.inmueblesMutable.setValue(inmuebles);
-
+*/
 
     }
 

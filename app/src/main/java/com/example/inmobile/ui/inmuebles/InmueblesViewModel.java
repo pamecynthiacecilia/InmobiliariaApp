@@ -29,7 +29,6 @@ public class InmueblesViewModel extends AndroidViewModel {
 
     public InmueblesViewModel(@NonNull Application application) {
         super(application);
-
         context = application.getApplicationContext();
 
     }
@@ -59,9 +58,7 @@ public class InmueblesViewModel extends AndroidViewModel {
              Toast.makeText(context, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        /*ApiClient apiClient= ApiClient.getApi();
-        ArrayList<Inmueble> inmuebles = apiClient.obtnerPropiedades();
-        this.inmueblesMutable.setValue(inmuebles);*/
+
 
     }
 

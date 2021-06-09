@@ -50,12 +50,12 @@ public class InquilinoFragment extends Fragment {
             public void onChanged(Inquilino inquilino) {
                 tvNombre.setText(inquilino.getNombre());
                 tvApellido.setText(inquilino.getApellido());
-                tvCodigo.setText(inquilino.getIdInquilino() + "");
-                tvDNI.setText(inquilino.getDNI().toString()+"");
+                tvCodigo.setText(inquilino.getid() + "");
+                tvDNI.setText(inquilino.getdni()+ "");
                 tvEmail.setText(inquilino.getEmail());
-                tvTelefono.setText(inquilino.getTelefono());
+                tvTelefono.setText(inquilino.gettel());
                 tvGarante.setText(inquilino.getNombreGarante());
-                tvTelefonoGarante.setText(inquilino.getTelefonoGarante());
+                tvTelefonoGarante.setText(inquilino.gettelGarante());
 
         }
     });
